@@ -6,6 +6,24 @@
     <title>@ViewBag.Title -DTD Organizer</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    @*<link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
+        <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' rel='stylesheet' />*@
+
+    <link href='~/Content/fullcalendar/packages/core/main.css' rel='stylesheet' />
+    <link href='~/Content/fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
+    <link href='~/Content/fullcalendar/packages/timegrid/main.css' rel='stylesheet' />
+    @*<link href='~/Content/fullcalendar/packages/bootstrap/main.css' rel='stylesheet' />*@
+
+    <script src='~/Content/fullcalendar/packages/core/main.js'></script>
+    <script src='~/Content/fullcalendar/packages/daygrid/main.js'></script>
+    <script src='~/Content/fullcalendar/packages/interaction/main.js'></script>
+    <script src='~/Content/fullcalendar/packages/timegrid/main.js'></script>
+    @*<script src='~/Content/fullcalendar/packages/bootstrap/main.js'></script>*@
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -16,13 +34,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("DTD Organizer", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Calendar", "Index", "Calendar")</li>
+                    <li>@Html.ActionLink("Resources", "Index", "Resources")</li>
                 </ul>
             </div>
         </div>
@@ -35,8 +52,5 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Calendar";
+}
+
+    <div style="height:70vh; width:92.5vw">
+        <div id='calendar' style="margin-top:10vh"></div>
+    </div>
+
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            plugins: ['dayGrid', 'interaction', 'timeGrid'],
+            defaultView: 'dayGridMonth',
+            height: 'parent',
+            //themeSystem: 'bootstrap',
+            events: {
+                url: '/Calendar/GetCalendarData',
+                method: 'POST',
+                failure: function() {
+                    alert('there was an error while fetching events!');
+                },
+                color: 'yellow',   // a non-ajax option
+                textColor: 'black' // a non-ajax option
+            }
+        });
+
+       
+
+        calendar.render();
+    });
+
+
+</script>
+
+
