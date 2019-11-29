@@ -1,0 +1,165 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container text-center">
+    <h4 class="mt-4">Food management</h4>
+    <div class="row mt-5 mb-4">
+        <div class="col-12 col-sm-10 col-md-6 shadow">
+            <div class="row">
+                <div class="col-12 bg-light border-bottom d-flex flex-column justify-content-center" style="height:50px; border-bottom-color:antiquewhite">
+                    <h5 class="text-muted">Your order:</h5>
+                </div>
+                <div class="col-12 d-flex flex-row mt-2">
+                    <p class="font-weight-bold mr-4">Step 1: Pick a restaurant</p>
+                    <div class="d-flex flex-column align-items-start">
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" checked>Royal burger</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="optradio">Fitness house</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="optradio">Amigos</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 d-flex flex-row mt-2 border-top pt-3 pb-3" style="border-top-color:antiquewhite">
+                    <p class="font-weight-bold mr-4">Step 2: Write your order</p>
+                    <input type="text" class="form-control" id="order" placeholder="hamburger">
+                </div>
+                <div class="col-12 d-flex flex-row mt-2 border-top pt-2" style="border-top-color:antiquewhite">
+                    <p class="font-weight-bold mr-4">Step 3: Place your order</p>
+                    <button class="btn btn-outline-success " id="placeOrder">Place order</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 shadow">
+            <table class="table table-hover border-top-0">
+                <thead class="bg-light">
+                    <tr>
+
+                        <th scope="col"></th>
+                        <th scope="col">Restaurant name</th>
+                        <th scope="col">Price range</th>
+                        <th scope="col">Menu</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="">
+                        <th scope="row">1</th>
+                        <td>Royal burger</td>
+                        <td>$</td>
+                        <td><img class="img-enlargable" data-enlargable width="100" style="cursor: zoom-in" src="http://royalburger.com.mk/wp-content/uploads/2019/06/Meni-royal-burger.jpg" /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Fitness house</td>
+                        <td>$$</td>
+                        <td><img class="img-enlargable" data-enlargable width="100" style="cursor: zoom-in" src="http://royalburger.com.mk/wp-content/uploads/2019/06/Meni-royal-burger.jpg" /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Amigos</td>
+                        <td>$$$</td>
+                        <td><img class="img-enlargable" data-enlargable width="100" style="cursor: zoom-in" src="http://royalburger.com.mk/wp-content/uploads/2019/06/Meni-royal-burger.jpg" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-12 shadow">
+            <h4 class="mt-2 mb-3">Today's orders(02.12.2019):</h4>
+            <table class="table table-hover border-top-0" id="ordersTable">
+                <thead class="bg-light">
+                    <tr>
+
+                        <th scope="col"></th>
+                        <th scope="col">Restaurant name</th>
+                        <th scope="col">Order description</th>
+                        <th scope="col">Employee name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section scripts{
+
+    <script>
+        $(document).on('click', '.img-enlargable', function (e) {
+            //handler code here
+
+            var src = $(this).attr('src');
+            
+            debugger;
+            $('<div>').css({
+                background: 'RGBA(0,0,0,.5) url(' + src + ') no-repeat center',
+                backgroundSize: 'contain',
+                width: '100%', height: '100%',
+                position: 'fixed',
+                zIndex: '10000',
+                top: '0', left: '0',
+                cursor: 'zoom-out'
+            }).click(function () {
+                $(this).remove();
+            }).appendTo('body');
+        });
+    </script>
+   
+    
+    <script>
+        Storage.prototype.setObj = function (key, obj) {
+            return this.setItem(key, JSON.stringify(obj))
+        }
+        Storage.prototype.getObj = function (key) {
+            return JSON.parse(this.getItem(key))
+        }
+        
+        
+        $(document).on('click', '#placeOrder', function (e) {
+            var radioValue = $("input[name='optradio']:checked").parent('label').text();
+            var order = $("#order").val();
+            var table = $("#ordersTable");
+            var array = localStorage.getObj('ordersArray');
+            if (array == null) {
+                array = new Array();
+                rowNum = 1;
+            }
+            else {
+                rowNum = parseInt(array[array.length-1].num, 10) + 1;
+            }
+
+            var orderObject = {
+                restaurant: radioValue,
+                order: order,
+                num: rowNum
+            };
+           
+
+            array.push(orderObject);
+            localStorage.setObj('ordersArray', array);
+
+            if (order != "" && order != undefined && order != null) {
+                $('#ordersTable tr:last').after('<tr><th scope="row">' + rowNum + '</th><td>' + radioValue + '</td><td>' + order + '</td><td>David</td></tr>');
+            }
+            
+        });
+
+        $(document).ready(function () {
+            var array = localStorage.getObj('ordersArray');
+            
+            if (array != null) {
+                
+                array.forEach(function (i) {
+                    $('#ordersTable tr:last').after('<tr><th scope="row">' + i.num + '</th><td>' + i.restaurant + '</td><td>' + i.order + '</td><td>David</td></tr>');
+                });
+            }
+        });
+    </script>
+    }
