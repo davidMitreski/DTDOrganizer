@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LibraryController.cs" />
     <Compile Include="Controllers\ResourcesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -300,7 +301,9 @@
     <Content Include="Content\fullcalendar\packages\timegrid\main.min.css" />
     <Content Include="Content\fullcalendar\packages\timegrid\main.min.js" />
     <Content Include="Content\fullcalendar\vendor\rrule.js" />
+    <Content Include="Content\Images\Resources\Annotation.png" />
     <Content Include="Content\Images\Resources\coffee.png" />
+    <Content Include="Content\Images\Resources\docs.png" />
     <Content Include="Content\Images\Resources\notebook.jpg" />
     <Content Include="Content\Images\Resources\officeChair.jpg" />
     <Content Include="Content\Images\Resources\officeDesk.jpg" />
@@ -309,6 +312,7 @@
     <Content Include="Content\Images\Resources\stickyNotes.jpg" />
     <Content Include="Content\Images\Resources\stickyNotesAndMarkers.jpg" />
     <Content Include="Content\Images\Resources\tea.jpg" />
+    <Content Include="Content\Images\Resources\udemy.png" />
     <Content Include="Content\Images\Resources\waterGallon.jpeg" />
     <Content Include="Content\Images\Resources\whiteboard.jpg" />
     <Content Include="favicon.ico" />
@@ -318,6 +322,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\fullcalendar\examples\json\events.json" />
+    <Content Include="Content\fullcalendar\README.md" />
+    <Content Include="Content\CalendarData\CalendarEvents.json" />
     <Content Include="Content\fullcalendar\packages\bootstrap\package.json" />
     <Content Include="Content\fullcalendar\packages\bootstrap\README.md" />
     <Content Include="Content\fullcalendar\packages\core\package.json" />
@@ -336,8 +342,6 @@
     <Content Include="Content\fullcalendar\packages\rrule\README.md" />
     <Content Include="Content\fullcalendar\packages\timegrid\package.json" />
     <Content Include="Content\fullcalendar\packages\timegrid\README.md" />
-    <Content Include="Content\fullcalendar\README.md" />
-    <Content Include="Content\CalendarData\CalendarEvents.json" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\fullcalendar.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
@@ -465,17 +469,8 @@
     <Content Include="Views\Resources\_WorkMaterialsPartial.cshtml" />
     <Content Include="Views\Resources\RequestAnItem.cshtml" />
     <Content Include="Views\Calendar\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Content\fullcalendar\packages\bootstrap\main.d.ts" />
-    <TypeScriptCompile Include="Content\fullcalendar\packages\core\main.d.ts" />
-    <TypeScriptCompile Include="Content\fullcalendar\packages\daygrid\main.d.ts" />
-    <TypeScriptCompile Include="Content\fullcalendar\packages\google-calendar\main.d.ts" />
-    <TypeScriptCompile Include="Content\fullcalendar\packages\interaction\main.d.ts" />
-    <TypeScriptCompile Include="Content\fullcalendar\packages\list\main.d.ts" />
-    <TypeScriptCompile Include="Content\fullcalendar\packages\moment-timezone\main.d.ts" />
-    <TypeScriptCompile Include="Content\fullcalendar\packages\rrule\main.d.ts" />
-    <TypeScriptCompile Include="Content\fullcalendar\packages\timegrid\main.d.ts" />
+    <Content Include="Views\Library\Index.cshtml" />
+    <Content Include="Views\Library\BookDesc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -503,6 +498,17 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Content\fullcalendar\packages\bootstrap\main.d.ts" />
+    <TypeScriptCompile Include="Content\fullcalendar\packages\core\main.d.ts" />
+    <TypeScriptCompile Include="Content\fullcalendar\packages\daygrid\main.d.ts" />
+    <TypeScriptCompile Include="Content\fullcalendar\packages\google-calendar\main.d.ts" />
+    <TypeScriptCompile Include="Content\fullcalendar\packages\interaction\main.d.ts" />
+    <TypeScriptCompile Include="Content\fullcalendar\packages\list\main.d.ts" />
+    <TypeScriptCompile Include="Content\fullcalendar\packages\moment-timezone\main.d.ts" />
+    <TypeScriptCompile Include="Content\fullcalendar\packages\rrule\main.d.ts" />
+    <TypeScriptCompile Include="Content\fullcalendar\packages\timegrid\main.d.ts" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
