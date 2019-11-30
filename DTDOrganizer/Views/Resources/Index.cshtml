@@ -1,78 +1,77 @@
 ﻿@{
     ViewBag.Title = "Resources";
 }
-<table id="ResourcesNavigationTable" style="width: 100%; height:10vh; margin-bottom:10vh;">
-    <tbody>
-        <tr>
-            <td id="OfficeButton" style="height:100%; vertical-align:bottom; text-align:center">Office</td>
-            <td id="WorkMaterials" style="height:100%; vertical-align:bottom; text-align:center">Work Materials</td>
-            <td id="UtilitiesButton" style="height:100%; vertical-align:bottom; text-align:center">Utilities</td>
-            <td id="RequestsButton" style="height:100%; vertical-align:bottom; text-align:center">Requests</td>
-        </tr>
-    </tbody>
-</table>
-<div id ="ResourcesContent"></div>
+<!-- Navbar -->
+<nav class="navbar navbar-light bg-white justify-content-center">
+    <form class="form-inline mb-3 ">
+        <button id="OfficeButton" class="btn btn-white" type="button">Office</button>
+        <button id="WorkMaterials" class="btn btn-white" type="button">Work Materials</button>
+        <button id="UtilitiesButton" class="btn btn-white" type="button">Utilities</button>
+        <button id="RequestsButton" class="btn btn-white" type="button">Requests</button>
+    </form>
+</nav>
+<!-- Navbar -->
+<div id="ResourcesContent"></div>
 <script>
     $(function () {
-        adjustNavigation();
+        //adjustNavigation();
         $('#OfficeButton').click();
     });
 
     function requestAnItem(button) {
-        debugger;
         var id = $(button).attr("id");
         $.ajax({
             url: '/Resources/RequestAnItem',
             type: 'GET',
-            data: { id: id},
-          success: function(data) {
-             $('#ResourcesContent').html(data);
-          }
+            data: { id: id },
+            success: function (data) {
+                $('#ResourcesContent').html(data);
+            }
         });
     }
 
-    function adjustNavigation() {
-        var parts = $("#ResourcesNavigationTable").children('tbody').children('tr').children('td').length;
-        $("#ResourcesNavigationTable tbody tr td").each(function () {
-            $(this).css("width", "" + 100 / parts + "%");
-        });
-    }
+    //function adjustNavigation() {
+    //    var parts = $("#ResourcesNavigationTable").children('tbody').children('tr').children('td').length;
+    //    $("#ResourcesNavigationTable tbody tr td").each(function () {
+    //        $(this).css("width", "" + 100 / parts + "%");
+    //    });
+    //}
 
-    $('#OfficeButton').on("click", function () {  
+    $('#OfficeButton').on("click", function () {
         $.ajax({
-          url: '/Resources/Office',
-          dataType: 'html',
-          success: function(data) {
-             $('#ResourcesContent').html(data);
-          }
+            url: '/Resources/Office',
+            dataType: 'html',
+            success: function (data) {
+                $('#ResourcesContent').html(data);
+            }
         });
     });
-    $('#WorkMaterials').on("click", function () {  
+    $('#WorkMaterials').on("click", function () {
         $.ajax({
-          url: '/Resources/WorkMaterials',
-          dataType: 'html',
-          success: function(data) {
-             $('#ResourcesContent').html(data);
-          }
+            url: '/Resources/WorkMaterials',
+            dataType: 'html',
+            success: function (data) {
+                $('#ResourcesContent').html(data);
+            }
         });
     });
-    $("#UtilitiesButton").on("click", function () { 
-         $.ajax({
-          url: '/Resources/Utilities',
-          dataType: 'html',
-          success: function(data) {
-             $('#ResourcesContent').html(data);
-          }
+    $("#UtilitiesButton").on("click", function () {
+        $.ajax({
+            url: '/Resources/Utilities',
+            dataType: 'html',
+            success: function (data) {
+                $('#ResourcesContent').html(data);
+            }
         });
-    });  
-    $("#RequestsButton").on("click", function () { 
-         $.ajax({
-          url: '/Resources/Requests',
-          dataType: 'html',
-          success: function(data) {
-             $('#ResourcesContent').html(data);
-          }
-        }); 
-    });    
+    });
+    $("#RequestsButton").on("click", function () {
+        $.ajax({
+            url: '/Resources/Requests',
+            dataType: 'html',
+            success: function (data) {
+                $('#ResourcesContent').html(data);
+            }
+        });
+    });
 </script>
 
