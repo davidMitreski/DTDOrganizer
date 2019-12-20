@@ -148,11 +148,32 @@
     <Compile Include="Migrations\201911272239502_FixRequestsIdentity.Designer.cs">
       <DependentUpon>201911272239502_FixRequestsIdentity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912192040370_ShiftToDatabases.cs" />
+    <Compile Include="Migrations\201912192040370_ShiftToDatabases.Designer.cs">
+      <DependentUpon>201912192040370_ShiftToDatabases.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912192233162_BookModelUpdate.cs" />
+    <Compile Include="Migrations\201912192233162_BookModelUpdate.Designer.cs">
+      <DependentUpon>201912192233162_BookModelUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912201048391_CalendarFullDay.cs" />
+    <Compile Include="Migrations\201912201048391_CalendarFullDay.Designer.cs">
+      <DependentUpon>201912201048391_CalendarFullDay.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\CalendarModel.cs" />
+    <Compile Include="Models\BooksModel.cs" />
+    <Compile Include="Models\CalendarEventModel.cs" />
+    <Compile Include="Models\CalendarEventViewModel.cs" />
+    <Compile Include="Models\CoursesModel.cs" />
+    <Compile Include="Models\DocumentsModel.cs" />
+    <Compile Include="Models\DocumentUploadModel.cs" />
+    <Compile Include="Models\FoodViewModel.cs" />
+    <Compile Include="Models\LibraryViewModel.cs" />
     <Compile Include="Models\MyDBContext.cs" />
+    <Compile Include="Models\OrdersModel.cs" />
     <Compile Include="Models\ResourcesAdminModel.cs" />
     <Compile Include="Models\ResourcesRequestModel.cs" />
+    <Compile Include="Models\RestaurantModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -282,6 +303,7 @@
     <Content Include="Content\fullcalendar\vendor\rrule.js" />
     <Content Include="Content\Images\Library\Annotation.png" />
     <Content Include="Content\Images\Library\docs.jpg" />
+    <Content Include="Content\Images\Library\onlineCourses.jpg" />
     <Content Include="Content\Images\Library\udemy.png" />
     <Content Include="Content\Images\Resources\coffee.png" />
     <Content Include="Content\Images\Resources\notebook.jpg" />
@@ -294,6 +316,9 @@
     <Content Include="Content\Images\Resources\tea.jpg" />
     <Content Include="Content\Images\Resources\waterGallon.jpeg" />
     <Content Include="Content\Images\Resources\whiteboard.jpg" />
+    <Content Include="Content\Images\Restaurants\amigosMenu.jpg" />
+    <Content Include="Content\Images\Restaurants\fitnessHouseMenu.jpg" />
+    <Content Include="Content\Images\Restaurants\royalBurgerMenu.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -324,6 +349,18 @@
     <Content Include="Content\fullcalendar\packages\timegrid\package.json" />
     <Content Include="Content\fullcalendar\packages\timegrid\README.md" />
     <Content Include="Content\fullcalendar\README.md" />
+    <Content Include="Content\Documents\PT_Zakon_za_Rabotnite_odnosi_158_09122010.pdf" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\index.js.flow" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\fullcalendar.js" />
     <Content Include="Scripts\fullcalendar.min.js" />
@@ -432,6 +469,77 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\src\index.js" />
+    <Content Include="Scripts\src\methods\defaults.js" />
+    <Content Include="Scripts\src\methods\destroy.js" />
+    <Content Include="Scripts\src\methods\disableEventListeners.js" />
+    <Content Include="Scripts\src\methods\enableEventListeners.js" />
+    <Content Include="Scripts\src\methods\placements.js" />
+    <Content Include="Scripts\src\methods\update.js" />
+    <Content Include="Scripts\src\modifiers\applyStyle.js" />
+    <Content Include="Scripts\src\modifiers\arrow.js" />
+    <Content Include="Scripts\src\modifiers\computeStyle.js" />
+    <Content Include="Scripts\src\modifiers\flip.js" />
+    <Content Include="Scripts\src\modifiers\hide.js" />
+    <Content Include="Scripts\src\modifiers\index.js" />
+    <Content Include="Scripts\src\modifiers\inner.js" />
+    <Content Include="Scripts\src\modifiers\keepTogether.js" />
+    <Content Include="Scripts\src\modifiers\offset.js" />
+    <Content Include="Scripts\src\modifiers\preventOverflow.js" />
+    <Content Include="Scripts\src\modifiers\shift.js" />
+    <Content Include="Scripts\src\utils\clockwise.js" />
+    <Content Include="Scripts\src\utils\computeAutoPlacement.js" />
+    <Content Include="Scripts\src\utils\debounce.js" />
+    <Content Include="Scripts\src\utils\find.js" />
+    <Content Include="Scripts\src\utils\findCommonOffsetParent.js" />
+    <Content Include="Scripts\src\utils\findIndex.js" />
+    <Content Include="Scripts\src\utils\getBordersSize.js" />
+    <Content Include="Scripts\src\utils\getBoundaries.js" />
+    <Content Include="Scripts\src\utils\getBoundingClientRect.js" />
+    <Content Include="Scripts\src\utils\getClientRect.js" />
+    <Content Include="Scripts\src\utils\getFixedPositionOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetRect.js" />
+    <Content Include="Scripts\src\utils\getOffsetRectRelativeToArbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getOppositePlacement.js" />
+    <Content Include="Scripts\src\utils\getOppositeVariation.js" />
+    <Content Include="Scripts\src\utils\getOuterSizes.js" />
+    <Content Include="Scripts\src\utils\getParentNode.js" />
+    <Content Include="Scripts\src\utils\getPopperOffsets.js" />
+    <Content Include="Scripts\src\utils\getReferenceNode.js" />
+    <Content Include="Scripts\src\utils\getReferenceOffsets.js" />
+    <Content Include="Scripts\src\utils\getRoot.js" />
+    <Content Include="Scripts\src\utils\getRoundedOffsets.js" />
+    <Content Include="Scripts\src\utils\getScroll.js" />
+    <Content Include="Scripts\src\utils\getScrollParent.js" />
+    <Content Include="Scripts\src\utils\getStyleComputedProperty.js" />
+    <Content Include="Scripts\src\utils\getSupportedPropertyName.js" />
+    <Content Include="Scripts\src\utils\getViewportOffsetRectRelativeToArtbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getWindow.js" />
+    <Content Include="Scripts\src\utils\getWindowSizes.js" />
+    <Content Include="Scripts\src\utils\includeScroll.js" />
+    <Content Include="Scripts\src\utils\index.js" />
+    <Content Include="Scripts\src\utils\isBrowser.js" />
+    <Content Include="Scripts\src\utils\isFixed.js" />
+    <Content Include="Scripts\src\utils\isFunction.js" />
+    <Content Include="Scripts\src\utils\isIE.js" />
+    <Content Include="Scripts\src\utils\isModifierEnabled.js" />
+    <Content Include="Scripts\src\utils\isModifierRequired.js" />
+    <Content Include="Scripts\src\utils\isNumeric.js" />
+    <Content Include="Scripts\src\utils\isOffsetContainer.js" />
+    <Content Include="Scripts\src\utils\removeEventListeners.js" />
+    <Content Include="Scripts\src\utils\runModifiers.js" />
+    <Content Include="Scripts\src\utils\setAttributes.js" />
+    <Content Include="Scripts\src\utils\setStyles.js" />
+    <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -452,6 +560,20 @@
     <Content Include="Views\Library\Index.cshtml" />
     <Content Include="Views\Library\BookDesc.cshtml" />
     <Content Include="Views\Food\Index.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper.js.flow" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Library\AddBook.cshtml" />
+    <Content Include="Views\Calendar\AddEvent.cshtml" />
+    <Content Include="Views\Library\AddCourse.cshtml" />
+    <Content Include="Views\Library\AddDocument.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -476,6 +598,15 @@
     <EmbeddedResource Include="Migrations\201911272239502_FixRequestsIdentity.resx">
       <DependentUpon>201911272239502_FixRequestsIdentity.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912192040370_ShiftToDatabases.resx">
+      <DependentUpon>201912192040370_ShiftToDatabases.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912192233162_BookModelUpdate.resx">
+      <DependentUpon>201912192233162_BookModelUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912201048391_CalendarFullDay.resx">
+      <DependentUpon>201912201048391_CalendarFullDay.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
@@ -490,6 +621,7 @@
     <TypeScriptCompile Include="Content\fullcalendar\packages\list\main.d.ts" />
     <TypeScriptCompile Include="Content\fullcalendar\packages\rrule\main.d.ts" />
     <TypeScriptCompile Include="Content\fullcalendar\packages\timegrid\main.d.ts" />
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
