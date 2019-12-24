@@ -6,12 +6,14 @@ using System.Web;
 
 namespace DTDOrganizer.Models
 {
+    //A view model that is used to represent fields in a form, validate and gather data for a Calendar Event and 
+    //pass that data to a CalendarEventModel so it can be stored to a database;
+    //For fields meaning check the CalendarEventModel model
     public class CalendarEventViewModel
     {
         public string title { get; set; }
         [DataType(DataType.Date)]
         public DateTime startDate { get; set; }
-
         [DataType(DataType.Time)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm}")]
         public string startTime { get; set; }
@@ -24,9 +26,6 @@ namespace DTDOrganizer.Models
         [MaxLength(150)]
         public string description { get; set; }
         public bool allDay { get; set; }
-    }
-
-    public enum eventColor { 
-        Red, Blue, Aqua, BlueViolet, BurlyWood, DarkOrange, DodgerBlue, Gold, Green, LightGreen, Silver, Yellow
-    }
+        public calendarEventType eventType { get; set; }
+    } 
 }

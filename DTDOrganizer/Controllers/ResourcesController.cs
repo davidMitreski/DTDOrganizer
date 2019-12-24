@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace DTDOrganizer.Controllers
 {
+    //Handles the HTTP requests for the Resources module
     public class ResourcesController : Controller
     {
         private MyDBContext db = new MyDBContext();
@@ -16,26 +17,36 @@ namespace DTDOrganizer.Controllers
         {
             return View();
         }
+
+        // POST: Resources/Office
+        [HttpPost]
         public ActionResult Office()
         {
             return PartialView("~/Views/Resources/_ResourcePartial.cshtml", db.AdminResources.Where(i => i.Type == ResourceType.Office));
         }
 
+        // POST: Resources/WorkMaterials
+        [HttpPost]
         public ActionResult WorkMaterials()
         {
             return PartialView("~/Views/Resources/_ResourcePartial.cshtml", db.AdminResources.Where(i => i.Type == ResourceType.WorkMaterials));
         }
 
+        // POST: Resources/Utilities
+        [HttpPost]
         public ActionResult Utilities()
         {
             return PartialView("~/Views/Resources/_ResourcePartial.cshtml", db.AdminResources.Where(i => i.Type == ResourceType.Utilities));
         }
 
+        // POST: Resources/Requests
+        [HttpPost]
         public ActionResult Requests()
         {
             return PartialView("~/Views/Resources/_RequestsPartial.cshtml", db.RequestResources);
         }
 
+        // GET: Resources/RequestAnItem
         [HttpGet]
         public ActionResult RequestAnItem(int id) {
             ResourcesAdminModel model = db.AdminResources.Where(i => i.Id == id).FirstOrDefault();
@@ -51,6 +62,7 @@ namespace DTDOrganizer.Controllers
             return PartialView("~/Views/Resources/RequestAnItem.cshtml", viewModel);
         }
 
+        // POST: Resources/RequestAnItem
         [HttpPost]
         public ActionResult RequestAnItem(ResourcesRequestViewModel model)
         {
@@ -94,7 +106,7 @@ namespace DTDOrganizer.Controllers
             }
         }
 
-        // POST: Resources/Delete/5
+        // POST: Resources/Delete
         [HttpPost]
         public ActionResult Delete(int id)
         {
@@ -110,6 +122,7 @@ namespace DTDOrganizer.Controllers
             }
         }
 
+        //Disposes of the database instance so we can be certain that the database resource is released
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

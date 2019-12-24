@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace DTDOrganizer.Controllers
 {
+    //Handles the HTTP requests for the Food module
     public class FoodController : Controller
     {
         private MyDBContext db = new MyDBContext();
@@ -24,9 +25,10 @@ namespace DTDOrganizer.Controllers
             return View(model);
         }
 
+        // POST: Food/PlaceOrder
+        [HttpPost]
         public ActionResult PlaceOrder(string order, string restaurant)
         {
-            //TODO: Implement db logic
             OrdersModel newOrder = new OrdersModel
             {
                 order = order,
@@ -34,10 +36,9 @@ namespace DTDOrganizer.Controllers
                 employee = "DEFAULT EMPLOYEE", //This should get value from the authenthicated employee
                 orderDate = DateTime.Now.Date.ToString("dd/MM/yyyy")
             };
-
-            db.OrdersModels.Add(newOrder);
             try
             {
+                db.OrdersModels.Add(newOrder);
                 db.SaveChanges();
             }
             catch (Exception e)
@@ -47,13 +48,14 @@ namespace DTDOrganizer.Controllers
 
             return RedirectToAction("Index");
         }
-
+        // GET: Food/AddRestaurant
         public ActionResult AddRestaurant()
         {
 
             return View();
         }
 
+        // POST: Food/AddRestaurant
         [HttpPost]
         public ActionResult AddRestaurant(RestaurantViewModel model)
         {
@@ -81,6 +83,7 @@ namespace DTDOrganizer.Controllers
             }
         }
 
+        // POST: Food/Delete
         [HttpPost]
         public ActionResult Delete(int id)
         {
@@ -94,6 +97,13 @@ namespace DTDOrganizer.Controllers
             {
                 return View();
             }
+        }
+
+        //Disposes of the database instance so we can be certain that the database resource is released
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

@@ -15,7 +15,6 @@
 <div id="ResourcesContent"></div>
 <script>
     $(function () {
-        //adjustNavigation();
         $('#OfficeButton').click();
     });
 
@@ -31,17 +30,11 @@
         });
     }
 
-    //function adjustNavigation() {
-    //    var parts = $("#ResourcesNavigationTable").children('tbody').children('tr').children('td').length;
-    //    $("#ResourcesNavigationTable tbody tr td").each(function () {
-    //        $(this).css("width", "" + 100 / parts + "%");
-    //    });
-    //}
-
     $('#OfficeButton').on("click", function () {
         $.ajax({
             url: '/Resources/Office',
             dataType: 'html',
+            type: 'POST',
             success: function (data) {
                 $('#ResourcesContent').html(data);
             }
@@ -51,6 +44,7 @@
         $.ajax({
             url: '/Resources/WorkMaterials',
             dataType: 'html',
+            type: 'POST',
             success: function (data) {
                 $('#ResourcesContent').html(data);
             }
@@ -60,6 +54,7 @@
         $.ajax({
             url: '/Resources/Utilities',
             dataType: 'html',
+            type: 'POST',
             success: function (data) {
                 $('#ResourcesContent').html(data);
             }
@@ -69,6 +64,7 @@
         $.ajax({
             url: '/Resources/Requests',
             dataType: 'html',
+            type: 'POST',
             success: function (data) {
                 $('#ResourcesContent').html(data);
             }

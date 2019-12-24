@@ -9,10 +9,15 @@ using System.Web.Mvc;
 
 namespace DTDOrganizer.Controllers
 {
+    //Handles the HTTP requests for the Calendar module;
+    //Convention: If an action returns a View with no parameters(ex. return View()), 
+    //the View's name is [action_name].cshtml under the ~/Views/Calendar folder;
     public class CalendarController : Controller
     {
         private MyDBContext db = new MyDBContext();
         // GET: Calendar
+        //Returns the main calendar from the Calendar controller and
+        //displays the number of events during the present day
         public ActionResult Index()
         {
             List<CalendarEventModel> dailyEvents = db.CalendarEventModels.ToList().FindAll(e => e.start.StartsWith(DateTime.Now.Date.ToString()));
@@ -20,6 +25,9 @@ namespace DTDOrganizer.Controllers
             return View();
         }
 
+        // POST: Calendar/GetCalendarData
+        //Retrieves all the calendar events in the Database and
+        //returns them in Json format for the calendar component in the View
         [HttpPost]
         public ActionResult GetCalendarData()
         {
@@ -27,13 +35,19 @@ namespace DTDOrganizer.Controllers
             return Json(model);
 
         }
+
         // GET: Calendar/AddEvent
+        //Returns View with a form for creating a new Calendar Event
         public ActionResult AddEvent()
         {
             return View();
         }
 
         // POST: Calendar/AddEvent
+        //Retrieves the data supplied in the form displayed by the AddEvent() function and
+        //tries to write the new Calendar Event in the database.
+        //Returns the aformentioned View with a form if bad informations are supplied. 
+        //Finally it redirects to the Index action and subsequently returns the main calendar View if the database update is successful
         [HttpPost]
         public ActionResult AddEvent(CalendarEventViewModel newEvent)
         {
@@ -53,10 +67,9 @@ namespace DTDOrganizer.Controllers
                 else {
                     calendarEvent.end = null;
                 }
-
-                db.CalendarEventModels.Add(calendarEvent);
                 try
                 {
+                    db.CalendarEventModels.Add(calendarEvent);
                     db.SaveChanges();
                 }
                 catch (Exception e) {
@@ -71,24 +84,32 @@ namespace DTDOrganizer.Controllers
             }
         }
 
+        // POST: Calendar/DeleteEvent
+        //Tries to find the Calendar Event with the specific id supplied as a parameter and
+        //if the Calendar Event is valid it is removed from the database
         [HttpPost]
         public ActionResult DeleteEvent(string id)
         {
             var calendarEvent = db.CalendarEventModels.ToList().FirstOrDefault(e => e.id == int.Parse(id));
             if (calendarEvent != null) {
-                db.CalendarEventModels.Remove(calendarEvent);
                 try
                 {
+                    db.CalendarEventModels.Remove(calendarEvent);
                     db.SaveChanges();
                 }
                 catch (Exception e) {
                     Console.WriteLine(e.Message);
                 }
             }
-
             return Json("success");
         }
 
+        // POST: Calendar/EditEvent
+        //Retrieves an existing Calendar Event as a CalendarEventModel.
+        //Tries to find the specified Calendar Event in the database.
+        //If the Calendar Event is valid the existing record is updated with the new information supplied in the model about
+        //whether an Event is a full day event, when does it start and when does it end.
+        //Finally it redirects to the Index action and subsequently returns the main calendar View 
         [HttpPost]
         public ActionResult EditEvent(CalendarEventModel newEvent)
         {
@@ -108,9 +129,14 @@ namespace DTDOrganizer.Controllers
                 }
             }
 
-            return View();
+            return RedirectToAction("Index");
         }
 
-
+        //Disposes of the database instance so we can be certain that the database resource is released
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

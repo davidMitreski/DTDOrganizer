@@ -1,4 +1,5 @@
 ﻿using DTDOrganizer.Models;
+using DTDOrganizer.Patterns;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Web.Mvc;
 
 namespace DTDOrganizer.Controllers
 {
+    //Handles the HTTP requests for the Library module
     public class LibraryController : Controller
     {
         private MyDBContext db = new MyDBContext();
@@ -44,30 +46,23 @@ namespace DTDOrganizer.Controllers
             
             try
             {
-                // TODO: Add db insert logic here
                 //9780596007126 - Head First Design Patterns
                 string isbn = collection["isbn"];
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn +"&key=AIzaSyARYJrBPVJ9B77JveSDkwPI5IvWUGVHe1M");
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                string book = new StreamReader(response.GetResponseStream()).ReadToEnd();
-                JObject jsonBook = JObject.Parse(book);
-                JArray authorsArray = (JArray)jsonBook["items"][0]["volumeInfo"]["authors"];
-                BooksModel addBook = new BooksModel()
+                GoogleBooksApiReader bookInformation = new GoogleBooksApiReader((HttpWebResponse)request.GetResponse());
+                if (bookInformation.isValid())
                 {
-                    isbn = isbn,
-                    title = (string)jsonBook["items"][0]["volumeInfo"]["title"],
-                    authors = authorsArray.Select(a => (string)a).ToList<string>(),
-                    pages = (int)jsonBook["items"][0]["volumeInfo"]["pageCount"],
-                    publisher = (string)jsonBook["items"][0]["volumeInfo"]["publisher"],
-                    publishedDate = (string)jsonBook["items"][0]["volumeInfo"]["publishedDate"],
-                    description = (string)jsonBook["items"][0]["volumeInfo"]["description"],
-                    rating = (float)jsonBook["items"][0]["volumeInfo"]["averageRating"],
-                    imagePath = (string)jsonBook["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]
-                };
+                    BooksModel addBook = new BooksModel(bookInformation);
 
-                db.BooksModels.Add(addBook);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                    db.BooksModels.Add(addBook);
+                    db.SaveChanges();
+                    ViewBag.bookIsbnException = null;
+                    return RedirectToAction("Index");
+                }
+                else {
+                    ViewBag.bookIsbnException = "Wrong ISBN code!";
+                    throw new Exception("Wrong ISBN code");
+                }
             }
             catch(Exception e)
             {
@@ -89,12 +84,13 @@ namespace DTDOrganizer.Controllers
 
             try
             {
-                // TODO: Add db insert logic here
                 CoursesModel newCourse = new CoursesModel
                 {
                     name = collection["name"],
                     link = collection["link"]
                 };
+                db.CoursesModels.Add(newCourse);
+
                 return RedirectToAction("Index");
             }
             catch (Exception e)
@@ -129,6 +125,8 @@ namespace DTDOrganizer.Controllers
                     document.File.SaveAs(_path);
                     addDocument.path = _path;
                 }
+
+                db.DocumentsModels.Add(addDocument);
                 return RedirectToAction("Index");
             }
             catch (Exception e)
@@ -136,6 +134,13 @@ namespace DTDOrganizer.Controllers
                 Console.WriteLine(e.Message);
                 return View();
             }
+        }
+
+        //Disposes of the database instance so we can be certain that the database resource is released
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
 
     }

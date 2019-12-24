@@ -164,6 +164,10 @@
     <Compile Include="Migrations\201912241252155_ViewModelsCleanup.Designer.cs">
       <DependentUpon>201912241252155_ViewModelsCleanup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912242244133_AddedCalendarEventTypes.cs" />
+    <Compile Include="Migrations\201912242244133_AddedCalendarEventTypes.Designer.cs">
+      <DependentUpon>201912242244133_AddedCalendarEventTypes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BooksModel.cs" />
     <Compile Include="Models\CalendarEventModel.cs" />
@@ -181,6 +185,7 @@
     <Compile Include="Models\ResourcesRequestViewModel.cs" />
     <Compile Include="Models\RestaurantModel.cs" />
     <Compile Include="Models\RestaurantViewModel.cs" />
+    <Compile Include="Patterns\GoogleBooksApiReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -618,6 +623,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912241252155_ViewModelsCleanup.resx">
       <DependentUpon>201912241252155_ViewModelsCleanup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912242244133_AddedCalendarEventTypes.resx">
+      <DependentUpon>201912242244133_AddedCalendarEventTypes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
