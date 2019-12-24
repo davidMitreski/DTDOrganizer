@@ -1,6 +1,7 @@
 ﻿using DTDOrganizer.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -39,11 +40,60 @@ namespace DTDOrganizer.Controllers
             {
                 db.SaveChanges();
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 Console.WriteLine(e.Message);
             }
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult AddRestaurant()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddRestaurant(RestaurantViewModel model)
+        {
+            try
+            {
+                RestaurantModel addRestaurant = new RestaurantModel
+                {
+                    name = model.name,
+                    priceRange = model.priceRange
+                };
+                if (model.menuImage.ContentLength > 0)
+                {
+                    string _FileName = Path.GetFileName(model.menuImage.FileName);
+                    string _path = Path.Combine(Server.MapPath("~/Content/Images/Restaurants"), _FileName);
+                    model.menuImage.SaveAs(_path);
+                    addRestaurant.menuImage = _path;
+                }
+
+                db.RestaurantModels.Add(addRestaurant);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                var restaurant = db.RestaurantModels.ToList().Find(r => r.id == id);
+                if(restaurant != null) db.RestaurantModels.Remove(restaurant);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

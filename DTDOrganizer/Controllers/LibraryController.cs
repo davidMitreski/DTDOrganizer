@@ -117,7 +117,7 @@ namespace DTDOrganizer.Controllers
 
             try
             {
-                // TODO: Add db insert logic here
+                
                 DocumentsModel addDocument = new DocumentsModel
                 {
                     name = document.fileName

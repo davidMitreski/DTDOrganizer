@@ -15,6 +15,8 @@ namespace DTDOrganizer.Controllers
         // GET: Calendar
         public ActionResult Index()
         {
+            List<CalendarEventModel> dailyEvents = db.CalendarEventModels.ToList().FindAll(e => e.start.StartsWith(DateTime.Now.Date.ToString()));
+            ViewBag.data = dailyEvents;
             return View();
         }
 

@@ -160,6 +160,10 @@
     <Compile Include="Migrations\201912201048391_CalendarFullDay.Designer.cs">
       <DependentUpon>201912201048391_CalendarFullDay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912241252155_ViewModelsCleanup.cs" />
+    <Compile Include="Migrations\201912241252155_ViewModelsCleanup.Designer.cs">
+      <DependentUpon>201912241252155_ViewModelsCleanup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BooksModel.cs" />
     <Compile Include="Models\CalendarEventModel.cs" />
@@ -172,8 +176,11 @@
     <Compile Include="Models\MyDBContext.cs" />
     <Compile Include="Models\OrdersModel.cs" />
     <Compile Include="Models\ResourcesAdminModel.cs" />
+    <Compile Include="Models\ResourcesAdminViewModel.cs" />
     <Compile Include="Models\ResourcesRequestModel.cs" />
+    <Compile Include="Models\ResourcesRequestViewModel.cs" />
     <Compile Include="Models\RestaurantModel.cs" />
+    <Compile Include="Models\RestaurantViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -553,7 +560,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Resources\Index.cshtml" />
-    <Content Include="Views\Resources\_OfficePartial.cshtml" />
+    <Content Include="Views\Resources\_ResourcePartial.cshtml" />
     <Content Include="Views\Resources\_RequestsPartial.cshtml" />
     <Content Include="Views\Resources\RequestAnItem.cshtml" />
     <Content Include="Views\Calendar\Index.cshtml" />
@@ -574,6 +581,8 @@
     <Content Include="Views\Calendar\AddEvent.cshtml" />
     <Content Include="Views\Library\AddCourse.cshtml" />
     <Content Include="Views\Library\AddDocument.cshtml" />
+    <Content Include="Views\Resources\CreateResource.cshtml" />
+    <Content Include="Views\Food\AddRestaurant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -606,6 +615,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912201048391_CalendarFullDay.resx">
       <DependentUpon>201912201048391_CalendarFullDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912241252155_ViewModelsCleanup.resx">
+      <DependentUpon>201912241252155_ViewModelsCleanup.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

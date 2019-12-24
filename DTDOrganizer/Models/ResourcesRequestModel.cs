@@ -26,10 +26,16 @@ namespace DTDOrganizer.Models
         public string Comment { get; set; }
 
         public bool Urgent { get; set; }
-    }
-
-    public enum ResourceType
-    {
-        Office, WorkMaterials,Utilities
+        public bool done { get; set; }
+        public string orderDate { get; set; }
+        public ResourcesRequestModel(ResourcesRequestViewModel viewModel) {
+            type = viewModel.type;
+            ResourceName = viewModel.ResourceName;
+            Qty = viewModel.Qty;
+            Comment = viewModel.Comment;
+            Urgent = viewModel.Urgent;
+            done = false;
+            orderDate = DateTime.Now.Date.ToString("yyyy-MM-dd");
+        }
     }
 }

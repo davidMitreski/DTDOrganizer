@@ -1,0 +1,16 @@
+﻿@model IEnumerable<DTDOrganizer.Models.ResourcesAdminModel>
+    <div class="row" style="height:100%; margin-bottom:10vh;">
+        @foreach (var item in Model)
+        {
+            <div class="mt-2 mb-4 col-sm-12 col-md-6 col-lg-4">
+                <div class="card shadow ">
+                    <img src="@Url.Content(item.Image)" class="mt-2 ml-2 card-img-top" style="width:200px; height:200px;">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.Description.</p>
+                        <button id="@item.Id" onClick="requestAnItem(this)" class="btn btn-outline-dark">Request</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
