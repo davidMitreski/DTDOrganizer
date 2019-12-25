@@ -7,7 +7,7 @@ using System.Web;
 namespace DTDOrganizer.Models
 {
     //A view model that is used to represent fields in a form, validate and gather data for a Calendar Event and 
-    //pass that data to a CalendarEventModel so it can be stored to a database;
+    //pass that data to a CalendarEventModel so it can be stored in a database;
     //For fields meaning check the CalendarEventModel model
     public class CalendarEventViewModel
     {

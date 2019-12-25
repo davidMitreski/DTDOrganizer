@@ -10,26 +10,26 @@
         <button id="RequestsButton" class="btn btn-white btn-sm" type="button">Requests</button>
     </form>
 </nav>
-
 <!-- Navbar -->
+
 <div id="ResourcesContent"></div>
+
 <script>
+    //Sets office resources as default view on page load
     $(function () {
         $('#OfficeButton').click();
     });
 
-    function requestAnItem(button) {
+    //Makes async call to the controller for deletion of the resource item with a specific id
+    function deleteAnItem(button) {
         var id = $(button).attr("id");
         $.ajax({
-            url: '/Resources/RequestAnItem',
-            type: 'GET',
-            data: { id: id },
-            success: function (data) {
-                $('#ResourcesContent').html(data);
-            }
+            url: '/Resources/Delete',
+            type: 'POST',
+            data: { id: id }
         });
     }
-
+     //The '.on("click"...)' functions bellow handle changing between different resource type views and the requests view if authorized
     $('#OfficeButton').on("click", function () {
         $.ajax({
             url: '/Resources/Office',

@@ -8,8 +8,12 @@ using System.Web;
 
 namespace DTDOrganizer.Models
 {
+    //A view model that is used to represent fields in a form, validate and gather data for a resource item request and 
+    //pass that data to a ResourcesRequestModel so it can be stored in a database;
+    //For fields meaning check the ResourcesRequestModel model
     public class ResourcesRequestViewModel
     {
+        public int id { get; set; }
         public ResourceType type { get; set; }
 
         [DisplayName("Name of resource")]
@@ -22,10 +26,5 @@ namespace DTDOrganizer.Models
         public string Comment { get; set; }
 
         public bool Urgent { get; set; }
-    }
-
-    public enum ResourceType
-    {
-        Office, WorkMaterials,Utilities
     }
 }
